@@ -1,7 +1,9 @@
+import JobList from './components/JobList';
+
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline"> Hello, TailwindCSS</h1>
+    <div className="min-h-[100vh]">
+      <JobList />
     </div>
   );
 }
