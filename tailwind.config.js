@@ -4,6 +4,20 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
+        s: [
+          '16px',
+          {
+            lineHeight: '16px',
+            fontWeight: '600',
+          },
+        ],
+        l: [
+          '12px',
+          {
+            lineHeight: '16px',
+            fontWeight: '600',
+          },
+        ],
         xl: [
           '16px',
           {
@@ -12,11 +26,37 @@ module.exports = {
             fontWeight: '400',
           },
         ],
+
+        xll: [
+          '18px',
+          {
+            lineHeight: '24px',
+            letterSpacing: '-0.5625px',
+            fontWeight: '400',
+          },
+        ],
+
         '2xl': [
           '20px',
           {
             lineHeight: '25px',
             letterSpacing: '-0.625px',
+            fontWeight: '700',
+          },
+        ],
+        xxl: [
+          '24px',
+          {
+            lineHeight: '30px',
+            letterSpacing: '-0.75px',
+            fontWeight: '700',
+          },
+        ],
+        '3xl': [
+          '28px',
+          {
+            lineHeight: '34px',
+            letterSpacing: '0.413333px',
             fontWeight: '700',
           },
         ],
@@ -48,7 +88,7 @@ module.exports = {
         '2xl': { max: '1535px' },
         // => @media (max-width: 1535px) { ... }
 
-        xl: { max: '1279px' },
+        xl: { max: '1178px' },
         // => @media (max-width: 1279px) { ... }
 
         lg: { max: '1023px' },

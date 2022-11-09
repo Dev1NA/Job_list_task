@@ -8,9 +8,11 @@ const JobItem = () => {
         <img src={avatar} alt="avatar" className="rounded-full w-85 h-85 mr-6 md:w-66 md:h-66" />
         {/* info */}
         <div>
-          <h2 className="max-w-2xl text-main text-2xl mb-2 cursor-pointer md:text-xl">
-            Arbeitsmediziner/-in / Betriebsmediziner/-in (m/w/d) oder einen Arzt/eine Ärztin (m/w/d)
-            für die Weiterbildung zum Facharzt/ zur Fachärztin für Arbeitsmedizin (m/w/d)
+          <h2 className="max-w-2xl text-main text-2xl mb-2 md:text-xl">
+            <a href="#">
+              Arbeitsmediziner/-in / Betriebsmediziner/-in (m/w/d) oder einen Arzt/eine Ärztin
+              (m/w/d) für die Weiterbildung zum Facharzt/ zur Fachärztin für Arbeitsmedizin (m/w/d)
+            </a>
           </h2>
           <p className="text-xl text-grey mb-2">
             Department name • Allgemeines Krankenhaus der Stadt Wien - AKH
