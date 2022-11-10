@@ -1,8 +1,40 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
-import avatar from '../assets/avatar.jpg';
+import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
 
-const JobDetails = () => {
+const JobDetails = ({ selectedJob, days }) => {
+  const {
+    title,
+    address,
+    benefits,
+    location,
+    email,
+    pictures,
+    salary,
+    phone,
+    description,
+    employment_type,
+  } = selectedJob;
+
+  let settings = {
+    dots: false,
+    infinite: true,
+    speed: 200,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+  };
+
+  const { lat, long } = location;
+
+  const first = description.split('Responsopilities:', 2);
+  const second = first[1].split('Compensation & Benefits:', 2);
+
+  const text = first[0];
+  const responsopilitiesText = second[0];
+  const benefitsText = second[1].split('.');
+  benefitsText.pop();
+
   return (
     <div className="flex max-w-[1440px] mx-[auto] my-[10px] mt-[55px] mb-[100px] justify-between flex-wrap">
       {/* L E F T  */}
@@ -57,39 +89,25 @@ const JobDetails = () => {
         {/* T I T L E */}
         <div className="mt-[32px]">
           <div className="flex justify-between md:block">
-            <h1 className="max-w-[500px] text-xxl text-main mb-[7px]">
-              Arbeitsmediziner/-in / Betriebsmediziner/-in (m/w/d) oder einen Arzt/eine Ärztin
-              (m/w/d) für die Weiterbildung zum Facharzt/ zur Fachärztin für Arbeitsmedizin (m/w/d)
-            </h1>
+            <h1 className="max-w-[500px] text-xxl text-main mb-[7px]">{title}</h1>
             <div className="md:flex md:mt-[25px] md:mb-[20px] md:absolute r-[0px] mt-[15px] flex-col-reverse right-[15px]">
-              <h4 className="text-2xl text-main">€ 54 000—60 000</h4>
+              <h4 className="text-2xl text-main">€ {salary}</h4>
               <p className="text-xll md:text-end">Brutto, per year</p>
             </div>
           </div>
           <p className="text-xll text-[rgba(56,65,93,0.355988);] mb-[7px] md: mt-[30px]">
-            Posted 2 days ago
+            Posted {days} days ago
           </p>
         </div>
         {/* T E X T */}
         <div className="text-main text-xll max-w-[725px]">
-          <p className="mb-[40px] md:mt-[20px] md:pt-[15px]">
-            At WellStar, we all share common goals. That’s what makes us so successful – and such an
-            integral part of our communities. We want the same things, for our organization, for our
-            patients, and for our colleagues. As the most integrated healthcare provider in Georgia,
-            this means we pride ourselves on investing in the communities that we serve. We continue
-            to provide innovative care models, focused on improving quality and access to
-            healthcare.
-          </p>
+          {/* {description} */}
+          <p className="mb-[40px] md:mt-[20px] md:pt-[15px]">{text}</p>
           {/* R E S P O N S I B I L I T I E S */}
           <div>
             <h4 className="text-2xl mb-[15px]">Responsopilities</h4>
-            <p className="mb-[20px]">
-              Wellstar Medical Group, a physician-led multi-specialty group in Atlanta, Georgia, is
-              currently recruiting for a BC/BE cardiothoracic surgeon to join their existing
-              cardiovascular program. This is an opportunity to play a key role on a
-              multidisciplinary team of cardiologists and surgeons.
-            </p>
-            <p className="mb-[20px]">
+            <p className="mb-[20px]">{responsopilitiesText}</p>
+            {/* <p className="mb-[20px]">
               The ideal candidate will have five or more years of experience in cardiac surgery.
               This candidate should be facile with off-pump revascularization, complex aortic
               surgery, minimally invasive valve and valve repair, transcatheter valve replacement,
@@ -102,20 +120,18 @@ const JobDetails = () => {
               Medical Center and Atlanta Medical Center, Wellstar cardiac surgeons perform over 1200
               cardiac procedures per year. The cardiac service line is the only center in Georgia
               with the Joint Commission’s Comprehensive Cardiac Center certification.
-            </p>
+            </p> */}
           </div>
           {/* B E N E F I T S */}
           <div>
             <h3 className="text-2xl mb-[15px]">Compensation & Benefits:</h3>
             <h4>Our physicians enjoy a wide range of benefits, including:</h4>
             <ul className="list-[square] max-w-[450px] mb-[30px] pl-[20px]">
-              <li>Very competitive compensation package with bonuses</li>
-              <li>Medical, Dental, and Vision Insurance </li>
-              <li>Occurrence-based Malpractice Coverage </li>
-              <li>Short-term and Long-term Disability Insurance and life insurance</li>
+              {benefitsText.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
           </div>
-          {/* B U T T O N (REPEAT TWICE) */}
           <div className="md:flex md:justify-center">
             <a
               href="#"
@@ -130,51 +146,49 @@ const JobDetails = () => {
             </h2>
             <p className="text-xll mb-[10px]">Employment type</p>
             <div className="flex text-s">
-              <a
-                href="#"
-                className="flex items-center justify-center w-[225px] h-[50px] bg-[rgba(161,177,219,0.317343)] rounded border-[1px] border-[rgba(85,105,158,0.3);] mr-[8px]">
-                Full time
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center w-[225px] h-[50px] bg-[rgba(161,177,219,0.317343)] rounded border-[1px] border-[rgba(85,105,158,0.3);] mr-[8px]">
-                Part time
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center w-[225px] h-[50px] bg-[rgba(161,177,219,0.317343)] rounded border-[1px] border-[rgba(85,105,158,0.3);]">
-                Temporary
-              </a>
+              {employment_type.map((type, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="flex items-center justify-center w-[225px] h-[50px] bg-[rgba(161,177,219,0.317343)] rounded border-[1px] border-[rgba(85,105,158,0.3);] mr-[8px]">
+                  {type}
+                </a>
+              ))}
             </div>
             <p className="text-xll mt-[23px] mb-[10px]">Benefits</p>
             <div className="flex text-s text-[#988B49]">
-              <a
-                href="#"
-                className="flex items-center justify-center w-[225px] h-[50px] bg-[rgba(255,207,0,0.15)] rounded border-[1px] border-[#FFCF00] mr-[8px]">
-                Flexible shedule
-              </a>
-              <a
-                href="#"
-                className="flex items-center justify-center w-[225px] h-[50px] bg-[rgba(255,207,0,0.15)] rounded border-[1px] border-[#FFCF00] mr-[8px]">
-                Relocation assistance
-              </a>
+              {benefits.map((benefit, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="flex items-center justify-center w-[225px] h-[50px] bg-[rgba(255,207,0,0.15)] rounded border-[1px] border-[#FFCF00] mr-[8px]">
+                  {benefit}
+                </a>
+              ))}
             </div>
           </div>
           {/* A T T A C H E D   I M A G E S  */}
-          <div>
+          <div className="overflow-hidden	">
             <h3 className="border-b-[1px] border-[rgb(58,69,98,0.1)] pb-[9px] text-3xl mt-[85px] mb-[22px]">
               Attached images
             </h3>
-            <div className="flex justify-between mb-[85px] md:mb-0">
-              <img src={avatar} alt="" />
-              <img src={avatar} alt="" />
-              <img src={avatar} alt="" />
-            </div>
+            <Slider {...settings} className="mb-[85px] md:mb-0 max-w-[800px]">
+              {pictures.map((picture, i) => (
+                <div key={i} className="max-w-[200px] max-h-[130px] rounded md:max-w-[150px]">
+                  <img
+                    src={picture}
+                    alt={picture}
+                    className="w-[200px] max-h-[130px] rounded object-cover md:max-width-[150px]"
+                  />
+                </div>
+              ))}
+            </Slider>
           </div>
+          {/* </div> */}
         </div>
         {/* B U T T O N    R E T U R N */}
-        <a
-          href="#"
+        <Link
+          to="/"
           className="flex items-center w-[215px] h-[50px] bg-[rgb(56,69,100,0.14);] justify-center rounded md:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +204,7 @@ const JobDetails = () => {
             />
           </svg>
           <p className="ml-[19px] text-l text-main">RETURN TO JOB BOARD</p>
-        </a>
+        </Link>
       </div>
       {/* R I G H T */}
       <div className="pl-[15px] max-w-full">
@@ -218,14 +232,14 @@ const JobDetails = () => {
                     fill="#878D9D"
                   />
                 </svg>
-                <p className="text-xll text-[#E8EBF3]">AKH Wien, 1090 Wien, Währinger</p>
+                <p className="text-xll text-[#E8EBF3]">{address}</p>
               </div>
-              <p className="text-xll text-[#E8EBF3] mb-[8px]">Gürtel 18-20</p>
-              <a href="tel:+43014040012090" className="text-xll text-[#E8EBF3]">
-                +43 (01) 40400-12090
+              <a href={'tel:' + { phone }} className="text-xll text-[#E8EBF3]">
+                {/* +43 (01) 40400-12090 */}
+                {phone}
               </a>
-              <a href="mailto:post_akh_diz@akhwien.at" className="block text-[#E8EBF3]">
-                post_akh_diz@akhwien.at
+              <a href={'mailto:' + { email }} className="block text-[#E8EBF3]">
+                {email}
               </a>
             </div>
           </div>
@@ -233,7 +247,7 @@ const JobDetails = () => {
             <GoogleMapReact
               options={{ mapId: '624c545343341e2' }}
               bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
-              defaultCenter={{ lat: 50.450001, lng: 30.523333 }}
+              defaultCenter={{ lat, lng: long }}
               defaultZoom={11}
               zoom={11}
             />

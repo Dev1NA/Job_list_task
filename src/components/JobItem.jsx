@@ -1,22 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import avatar from '../assets/avatar.jpg';
 
-const JobItem = () => {
+const JobItem = ({ job, setSelectedJob, setDays }) => {
+  const { title, address, name, createdAt, pictures } = job;
+  let currentDate = Date.parse(new Date());
+  let days = Math.round((currentDate - Date.parse(createdAt)) / 86400000); //86400000 - ms в ондому дні
+
   return (
-    <div className="flex px-16 py-24 rounded w-screen justify-between max-w-[1400px] mx-[auto] my-[10px] bg-white shadow-[2px_1px_7px_rgba(0,0,0,0.08)] md:flex-col relative">
-      <div className="flex md:order-1">
+    <div className="flex px-16 py-24 rounded justify-between max-w-[1400px] mx-[auto] my-[10px] bg-white shadow-[2px_1px_7px_rgba(0,0,0,0.08)] md:flex-col relative">
+      <div className="flex md:order-1 basis-[800px] md:basis-0">
         <img src={avatar} alt="avatar" className="rounded-full w-85 h-85 mr-6 md:w-66 md:h-66" />
-        {/* info */}
         <div>
           <h2 className="max-w-2xl text-main text-2xl mb-2 md:text-xl">
-            <a href="#">
-              Arbeitsmediziner/-in / Betriebsmediziner/-in (m/w/d) oder einen Arzt/eine Ärztin
-              (m/w/d) für die Weiterbildung zum Facharzt/ zur Fachärztin für Arbeitsmedizin (m/w/d)
-            </a>
+            <Link
+              onClick={() => {
+                setSelectedJob(job);
+                setDays(days);
+              }}
+              to="/jobs"
+              className="max-w-full">
+              {title}
+            </Link>
           </h2>
-          <p className="text-xl text-grey mb-2">
-            Department name • Allgemeines Krankenhaus der Stadt Wien - AKH
-          </p>
+          <p className="text-xl text-grey mb-2">{name + ' • ' + address}</p>
           <div className="flex items-center">
             <svg
               className="mr-3"
@@ -126,7 +133,7 @@ const JobItem = () => {
             strokeWidth="2"
           />
         </svg>
-        <p className="text-xl text-grey md:text-end md:mb-4">Posted 2 days ago</p>
+        <p className="text-xl text-grey md:text-end md:mb-4">Posted {days} days ago</p>
       </div>
     </div>
   );
