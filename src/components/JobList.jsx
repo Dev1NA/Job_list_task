@@ -1,15 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import JobItem from './JobItem';
+import Loader from './Loader';
 
-const JobList = ({ jobs, setSelectedJob, setDays }) => {
-  console.log('jobs: ', jobs);
+const JobList = () => {
+  const { jobs, status } = useSelector((state) => state.jobs);
 
   return (
-    <>
-      {jobs.map((job) => (
-        <JobItem key={job.id} job={job} setSelectedJob={setSelectedJob} setDays={setDays} />
-      ))}
-    </>
+    <>{status === 'loading' ? <Loader /> : jobs.map((job) => <JobItem key={job.id} job={job} />)}</>
   );
 };
 

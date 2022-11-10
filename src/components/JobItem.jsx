@@ -1,29 +1,31 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import avatar from '../assets/avatar.jpg';
+import { setDays, setSelectedJob } from '../redux/slices/jobs';
 
-const JobItem = ({ job, setSelectedJob, setDays }) => {
+const JobItem = ({ job }) => {
   const { title, address, name, createdAt, pictures } = job;
+
   let currentDate = Date.parse(new Date());
   let days = Math.round((currentDate - Date.parse(createdAt)) / 86400000); //86400000 - ms в ондому дні
 
+  const dispatch = useDispatch();
+
+  const onClickJob = () => {
+    dispatch(setSelectedJob(job));
+    dispatch(setDays(days));
+  };
   return (
     <div className="flex px-16 py-24 rounded justify-between max-w-[1400px] mx-[auto] my-[10px] bg-white shadow-[2px_1px_7px_rgba(0,0,0,0.08)] md:flex-col relative">
       <div className="flex md:order-1 basis-[800px] md:basis-0">
         <img
           src={pictures[1]}
           alt="avatar"
-          className="rounded-full w-85 h-85 mr-6 md:w-66 md:h-66"
+          className="rounded-[50%] w-85 h-85 mr-6 md:w-66 md:h-66"
         />
         <div>
           <h2 className="max-w-2xl text-main text-2xl mb-2 md:text-xl">
-            <Link
-              onClick={() => {
-                setSelectedJob(job);
-                setDays(days);
-              }}
-              to="/jobs"
-              className="max-w-full">
+            <Link onClick={onClickJob} to="/jobs" className="max-w-full">
               {title}
             </Link>
           </h2>

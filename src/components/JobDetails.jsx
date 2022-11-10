@@ -2,8 +2,11 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import { useSelector } from 'react-redux';
 
-const JobDetails = ({ selectedJob, days }) => {
+const JobDetails = () => {
+  const { days, selectedJob } = useSelector((state) => state.jobs);
+
   const {
     title,
     address,
