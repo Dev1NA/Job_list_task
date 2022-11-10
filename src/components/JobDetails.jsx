@@ -17,15 +17,32 @@ const JobDetails = ({ selectedJob, days }) => {
     employment_type,
   } = selectedJob;
 
+  const [slides, setSlides] = React.useState(3);
+
+  React.useEffect(() => {
+    const mediaQueryMax = window.matchMedia('(max-width: 500px)');
+    const mediaQueryMin = window.matchMedia('(min-width: 550px)');
+    mediaQueryMax.addEventListener('change', () => {
+      setSlides(2);
+    });
+    mediaQueryMin.addEventListener('change', () => {
+      setSlides(3);
+    });
+  }, []);
+
   let settings = {
     dots: false,
     infinite: true,
     speed: 200,
-    slidesToShow: 3,
+    slidesToShow: slides,
     slidesToScroll: 1,
   };
 
   const { lat, long } = location;
+  const position = {
+    lat,
+    lng: long,
+  };
 
   const first = description.split('Responsopilities:', 2);
   const second = first[1].split('Compensation & Benefits:', 2);
@@ -212,7 +229,7 @@ const JobDetails = ({ selectedJob, days }) => {
           Contacts
         </h2>
         <div className="max-w-full">
-          <div className="bg-[#2A3047] max-w-full px-[62px] pt-[30px] rounded mr-[15px]">
+          <div className="bg-[#2A3047] max-w-full px-[62px] pt-[30px] rounded-t-lg mr-[15px]">
             <h4 className="text-2xl text-[#E7EAF0] max-w-[250px] mb-[8px]">
               Department name. University Hospital Giessen.
             </h4>
@@ -235,7 +252,6 @@ const JobDetails = ({ selectedJob, days }) => {
                 <p className="text-xll text-[#E8EBF3]">{address}</p>
               </div>
               <a href={'tel:' + { phone }} className="text-xll text-[#E8EBF3]">
-                {/* +43 (01) 40400-12090 */}
                 {phone}
               </a>
               <a href={'mailto:' + { email }} className="block text-[#E8EBF3]">
@@ -247,7 +263,7 @@ const JobDetails = ({ selectedJob, days }) => {
             <GoogleMapReact
               options={{ mapId: '624c545343341e2' }}
               bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
-              defaultCenter={{ lat, lng: long }}
+              defaultCenter={position}
               defaultZoom={11}
               zoom={11}
             />

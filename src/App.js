@@ -29,8 +29,6 @@ function App() {
     fetchData();
   }, []);
 
-  console.log('selectedJob: ', selectedJob);
-
   return (
     <div className="min-h-[100vh]">
       <Routes>

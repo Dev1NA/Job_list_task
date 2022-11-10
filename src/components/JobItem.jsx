@@ -10,7 +10,11 @@ const JobItem = ({ job, setSelectedJob, setDays }) => {
   return (
     <div className="flex px-16 py-24 rounded justify-between max-w-[1400px] mx-[auto] my-[10px] bg-white shadow-[2px_1px_7px_rgba(0,0,0,0.08)] md:flex-col relative">
       <div className="flex md:order-1 basis-[800px] md:basis-0">
-        <img src={avatar} alt="avatar" className="rounded-full w-85 h-85 mr-6 md:w-66 md:h-66" />
+        <img
+          src={pictures[1]}
+          alt="avatar"
+          className="rounded-full w-85 h-85 mr-6 md:w-66 md:h-66"
+        />
         <div>
           <h2 className="max-w-2xl text-main text-2xl mb-2 md:text-xl">
             <Link
