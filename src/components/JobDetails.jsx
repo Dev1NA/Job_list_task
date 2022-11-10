@@ -25,12 +25,16 @@ const JobDetails = () => {
   React.useEffect(() => {
     const mediaQueryMax = window.matchMedia('(max-width: 500px)');
     const mediaQueryMin = window.matchMedia('(min-width: 550px)');
-    mediaQueryMax.addEventListener('change', () => {
+    // mediaQueryMax.addEventListener('change', () => {
+    if (mediaQueryMax) {
       setSlides(2);
-    });
-    mediaQueryMin.addEventListener('change', () => {
+    }
+    // });
+    // mediaQueryMin.addEventListener('change', () => {
+    if (mediaQueryMin) {
       setSlides(3);
-    });
+    }
+    // });
   }, []);
 
   let settings = {

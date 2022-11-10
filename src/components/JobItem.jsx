@@ -21,7 +21,7 @@ const JobItem = ({ job }) => {
         <img
           src={pictures[1]}
           alt="avatar"
-          className="rounded-[50%] w-85 h-85 mr-6 md:w-66 md:h-66"
+          className="rounded-[50%] min-w-[85px] h-85 mr-6 md:min-w-[66px] md:h-66"
         />
         <div>
           <h2 className="max-w-2xl text-main text-2xl mb-2 md:text-xl">
