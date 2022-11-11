@@ -1,8 +1,8 @@
 import React from 'react';
-import GoogleMapReact from 'google-map-react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import { useSelector } from 'react-redux';
+import Map from './Map';
 
 const JobDetails = () => {
   const { days, selectedJob } = useSelector((state) => state.jobs);
@@ -22,19 +22,13 @@ const JobDetails = () => {
 
   const [slides, setSlides] = React.useState(3);
 
+  // Toogle count of slides attached images
   React.useEffect(() => {
-    const mediaQueryMax = window.matchMedia('(max-width: 500px)');
-    const mediaQueryMin = window.matchMedia('(min-width: 550px)');
-    // mediaQueryMax.addEventListener('change', () => {
-    if (mediaQueryMax) {
-      setSlides(2);
-    }
-    // });
-    // mediaQueryMin.addEventListener('change', () => {
-    if (mediaQueryMin) {
-      setSlides(3);
-    }
-    // });
+    const mediaQueryMax = window.matchMedia('(max-width: 510px)');
+    mediaQueryMax.matches ? setSlides(2) : setSlides(3);
+    mediaQueryMax.addEventListener('change', () => {
+      mediaQueryMax.matches ? setSlides(2) : setSlides(3);
+    });
   }, []);
 
   let settings = {
@@ -125,26 +119,11 @@ const JobDetails = () => {
         </div>
         {/* T E X T */}
         <div className="text-main text-xll max-w-[725px]">
-          {/* {description} */}
           <p className="mb-[40px] md:mt-[20px] md:pt-[15px]">{text}</p>
           {/* R E S P O N S I B I L I T I E S */}
           <div>
             <h4 className="text-2xl mb-[15px]">Responsopilities</h4>
             <p className="mb-[20px]">{responsopilitiesText}</p>
-            {/* <p className="mb-[20px]">
-              The ideal candidate will have five or more years of experience in cardiac surgery.
-              This candidate should be facile with off-pump revascularization, complex aortic
-              surgery, minimally invasive valve and valve repair, transcatheter valve replacement,
-              surgical atrial fibrillation ablation, ventricular assist device placement, and extra
-              corporeal membrane oxygenation.
-            </p>
-            <p className="mb-[20px]">
-              Wellstar is one of the largest integrated healthcare systems in the Southeast with 11
-              hospitals in Atlanta metro region. With two open heart programs at Kennestone Regional
-              Medical Center and Atlanta Medical Center, Wellstar cardiac surgeons perform over 1200
-              cardiac procedures per year. The cardiac service line is the only center in Georgia
-              with the Joint Commission’s Comprehensive Cardiac Center certification.
-            </p> */}
           </div>
           {/* B E N E F I T S */}
           <div>
@@ -266,15 +245,7 @@ const JobDetails = () => {
               </a>
             </div>
           </div>
-          <div className="max-w-full h-[300px] mr-[15px] rounded">
-            <GoogleMapReact
-              options={{ mapId: '624c545343341e2' }}
-              bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
-              defaultCenter={position}
-              defaultZoom={11}
-              zoom={11}
-            />
-          </div>
+          <Map center={position} />
         </div>
       </div>
     </div>
