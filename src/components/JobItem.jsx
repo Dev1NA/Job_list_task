@@ -5,14 +5,12 @@ import { setDays, setSelectedJob } from '../redux/slices/jobs';
 
 const JobItem = ({ job }) => {
   const { title, address, name, createdAt, pictures } = job;
-
   let currentDate = Date.parse(new Date());
   let days = Math.round((currentDate - Date.parse(createdAt)) / 86400000); //86400000 - ms в ондому дні
 
   const dispatch = useDispatch();
-
   const onClickJob = () => {
-    dispatch(setSelectedJob(job));
+    // dispatch(setSelectedJob(job));
     dispatch(setDays(days));
   };
   return (
@@ -25,7 +23,7 @@ const JobItem = ({ job }) => {
         />
         <div>
           <h2 className="max-w-2xl text-main text-2xl mb-2 md:text-xl">
-            <Link onClick={onClickJob} to="/jobs" className="max-w-full">
+            <Link onClick={onClickJob} to={`/jobs/${job.id}`} className="max-w-full">
               {title}
             </Link>
           </h2>
@@ -145,4 +143,4 @@ const JobItem = ({ job }) => {
   );
 };
 
-export default JobItem;
+export default React.memo(JobItem);
