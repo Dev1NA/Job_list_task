@@ -1,25 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import Map from './Map';
-const JobDetailsBody = ({ job }) => {
-  const {
-    address,
-    benefits,
-    createdAt,
-    description,
-    email,
-    employment_type,
-    id,
-    location,
-    name,
-    phone,
-    pictures,
-    salary,
-    title,
-    updatedAt,
-  } = job;
+const JobDetailsBody = ({
+  address,
+  benefits,
+  createdAt,
+  description,
+  email,
+  employment_type,
+  location,
+  phone,
+  pictures,
+  salary,
+  title,
+}) => {
   const [slides, setSlides] = React.useState(3);
   const [settings, setSettings] = React.useState({
     dots: false,
@@ -29,7 +24,8 @@ const JobDetailsBody = ({ job }) => {
     slidesToScroll: 1,
   });
 
-  const { days } = useSelector((state) => state.jobs);
+  let currentDate = Date.parse(new Date());
+  let days = Math.round((currentDate - Date.parse(createdAt)) / 86400000); //86400000 - ms в ондому дні
 
   const { lat, long } = location;
   const position = {

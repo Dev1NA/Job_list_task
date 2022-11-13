@@ -1,18 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setDays, setSelectedJob } from '../redux/slices/jobs';
 
-const JobItem = ({ job }) => {
-  const { title, address, name, createdAt, pictures } = job;
+const JobItem = ({ title, address, name, createdAt, pictures, id }) => {
   let currentDate = Date.parse(new Date());
   let days = Math.round((currentDate - Date.parse(createdAt)) / 86400000); //86400000 - ms в ондому дні
 
-  const dispatch = useDispatch();
-  const onClickJob = () => {
-    // dispatch(setSelectedJob(job));
-    dispatch(setDays(days));
-  };
   return (
     <div className="flex px-16 py-24 rounded justify-between max-w-[1400px] mx-[auto] my-[10px] bg-white shadow-[2px_1px_7px_rgba(0,0,0,0.08)] md:flex-col relative">
       <div className="flex md:order-1 basis-[800px] md:basis-0">
@@ -23,7 +15,7 @@ const JobItem = ({ job }) => {
         />
         <div>
           <h2 className="max-w-2xl text-main text-2xl mb-2 md:text-xl">
-            <Link onClick={onClickJob} to={`/jobs/${job.id}`} className="max-w-full">
+            <Link to={`/jobs/${id}`} className="max-w-full">
               {title}
             </Link>
           </h2>

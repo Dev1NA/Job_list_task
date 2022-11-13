@@ -45,7 +45,7 @@ const JobDetails = () => {
       ) : job === null && error ? (
         <NotFound />
       ) : (
-        <JobDetailsBody job={job} />
+        <JobDetailsBody {...job} />
       )}
     </>
   );
