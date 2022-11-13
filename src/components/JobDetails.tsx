@@ -6,9 +6,29 @@ import Loader from './Loader';
 import JobDetailsBody from './JobDetailsBody';
 import NotFound from './NotFound';
 
-const JobDetails = () => {
+interface DetailedJob {
+    id: string,
+    name: string,
+    email: string,
+    phone: string,
+    title: string,
+    salary: string,
+    address: string,
+    benefits: string[],
+    location: {
+      lat: number,
+      long: number,
+    },
+    pictures: string[],
+    createdAt: string,
+    updatedAt: string,
+    description: string,
+    employment_type: string[],
+}
+
+const JobDetails: React.FC = () => {
   const { id } = useParams();
-  const [job, setJob] = React.useState(null);
+  const [job, setJob] = React.useState<DetailedJob>();
   const [error, setError] = React.useState(false);
   React.useEffect(() => {
     const getDetailed = async () => {
@@ -21,12 +41,11 @@ const JobDetails = () => {
             Authorization: 'Bearer ' + token,
           },
         };
-        const { data } = await axios.get(baseURL, config);
+        const { data } : {data: DetailedJob[]} = await axios.get(baseURL, config);
         const detailedJob = data.find((item) => item.id === id);
 
         setJob(detailedJob);
       } catch {
-        console.log('I catch mistake');
         setError(true);
       }
     };
@@ -40,12 +59,12 @@ const JobDetails = () => {
 
   return (
     <>
-      {job === null && !error ? (
+      {job === undefined && !error ? (
         <Loader />
-      ) : job === null && error ? (
+      ) : job === undefined && error ? (
         <NotFound />
       ) : (
-        <JobDetailsBody {...job} />
+        <JobDetailsBody {...job!} />
       )}
     </>
   );

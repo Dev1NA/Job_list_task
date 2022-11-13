@@ -4,16 +4,16 @@ import JobDetails from './components/JobDetails';
 import JobList from './components/JobList';
 import NotFound from './components/NotFound';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="min-h-[100vh]">
       <Routes>
-        <Route path="/" element={<JobList />} exact />
-        <Route path="/jobs/:id" element={<JobDetails />} exact />
-        <Route path="*" element={<NotFound />} exact />
+        <Route path="/" element={<JobList />}/>
+        <Route path="/jobs/:id" element={<JobDetails />}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
-}
+};
 
 export default App;

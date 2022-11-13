@@ -1,8 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const JobItem = ({ title, address, name, createdAt, pictures, id }) => {
-  let currentDate = Date.parse(new Date());
+type JobItemProps = {
+  id: string,
+  title: string,
+  name: string,
+  address: string,
+  pictures: string[],
+  createdAt: string,
+}
+
+const JobItem: React.FC<JobItemProps> = ({ title, address, name, createdAt, pictures, id }) => {
+  let currentDate = Date.parse(new Date().toDateString());
   let days = Math.round((currentDate - Date.parse(createdAt)) / 86400000); //86400000 - ms в ондому дні
 
   return (

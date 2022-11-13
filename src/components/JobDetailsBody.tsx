@@ -2,18 +2,36 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import Map from './Map';
-const JobDetailsBody = ({
-  address,
-  benefits,
-  createdAt,
-  description,
-  email,
-  employment_type,
-  location,
-  phone,
-  pictures,
-  salary,
-  title,
+
+type DetailedJobProps = {
+  email: string,
+  phone: string,
+  title: string,
+  salary: string,
+  address: string,
+  benefits: string[],
+  location: {
+    lat: number,
+    long: number,
+  },
+  pictures: string[],
+  createdAt: string,
+  description: string,
+  employment_type: string[],
+}
+
+const JobDetailsBody: React.FC<DetailedJobProps> = ({
+    email,
+    phone,
+    title,
+    salary,
+    address,
+    benefits,
+    location,
+    pictures,
+    createdAt,
+    description,
+    employment_type
 }) => {
   const [slides, setSlides] = React.useState(3);
   const [settings, setSettings] = React.useState({
@@ -24,7 +42,7 @@ const JobDetailsBody = ({
     slidesToScroll: 1,
   });
 
-  let currentDate = Date.parse(new Date());
+  let currentDate = Date.parse(new Date().toDateString());
   let days = Math.round((currentDate - Date.parse(createdAt)) / 86400000); //86400000 - ms в ондому дні
 
   const { lat, long } = location;
@@ -246,7 +264,7 @@ const JobDetailsBody = ({
                 </a>
               </div>
             </div>
-            <Map center={position} />
+            <Map {...position} />
           </div>
         </div>
       </div>
