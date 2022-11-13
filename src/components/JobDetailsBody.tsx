@@ -82,7 +82,7 @@ const JobDetailsBody: React.FC<DetailedJobProps> = ({
               Job Details
             </h2>
             <div className="flex items-center md:mt-[25px]">
-              <a href="#" className="link flex items-center">
+              <div className="link flex items-center cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="19"
@@ -98,8 +98,8 @@ const JobDetailsBody: React.FC<DetailedJobProps> = ({
                   />
                 </svg>
                 <p className="mr-[31px] pl-[15px]">Save to my list</p>
-              </a>
-              <a href="#" className="link flex items-center">
+              </div>
+              <div className="link flex items-center cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="19"
@@ -114,15 +114,14 @@ const JobDetailsBody: React.FC<DetailedJobProps> = ({
                   />
                 </svg>
                 <p className=" pl-[15px]">Share</p>
-              </a>
+              </div>
             </div>
           </div>
           {/* B U T T O N (REPEAT TWICE) */}
-          <a
-            href="#"
-            className="px-[30px] py-[18px] bg-main inline-block rounded text-[#fff] text-l uppercase md:hidden">
+          <div
+            className="px-[30px] py-[18px] bg-main inline-block rounded text-[#fff] cursor-pointer text-l uppercase md:hidden">
             Apply now
-          </a>
+          </div>
           {/* T I T L E */}
           <div className="mt-[32px]">
             <div className="flex justify-between md:block">
@@ -155,11 +154,10 @@ const JobDetailsBody: React.FC<DetailedJobProps> = ({
               </ul>
             </div>
             <div className="md:flex md:justify-center">
-              <a
-                href="#"
-                className="px-[30px] py-[18px] bg-main inline-block rounded text-[#fff] text-l uppercase ">
+              <div
+                className="px-[30px] py-[18px] cursor-pointer bg-main inline-block rounded text-[#fff] text-l uppercase ">
                 Apply now
-              </a>
+              </div>
             </div>
             {/* A D D I T I O N A L */}
             <div>
@@ -169,23 +167,21 @@ const JobDetailsBody: React.FC<DetailedJobProps> = ({
               <p className="text-xll mb-[10px]">Employment type</p>
               <div className="flex text-s">
                 {employment_type.map((type, i) => (
-                  <a
+                  <div
                     key={i}
-                    href="#"
-                    className="flex items-center justify-center w-[225px] h-[50px] bg-[rgba(161,177,219,0.317343)] rounded border-[1px] border-[rgba(85,105,158,0.3);] mr-[8px]">
+                    className="flex items-center justify-center w-[225px] h-[50px] cursor-pointer bg-[rgba(161,177,219,0.317343)] rounded border-[1px] border-[rgba(85,105,158,0.3);] mr-[8px]">
                     {type}
-                  </a>
+                  </div>
                 ))}
               </div>
               <p className="text-xll mt-[23px] mb-[10px]">Benefits</p>
               <div className="flex text-s text-[#988B49]">
                 {benefits.map((benefit, i) => (
-                  <a
+                  <div
                     key={i}
-                    href="#"
-                    className="flex items-center justify-center w-[225px] h-[50px] bg-[rgba(255,207,0,0.15)] rounded border-[1px] border-[#FFCF00] mr-[8px]">
+                    className="flex items-center cursor-pointer justify-center w-[225px] h-[50px] bg-[rgba(255,207,0,0.15)] rounded border-[1px] border-[#FFCF00] mr-[8px]">
                     {benefit}
-                  </a>
+                  </div>
                 ))}
               </div>
             </div>
